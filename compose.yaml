@@ -1,0 +1,48 @@
+services:
+  client:
+    build: client
+    restart: unless-stopped
+    volumes:
+      - ./client/src:/app/src
+    ports:
+      - 5173:5173
+    depends_on:
+      - server
+
+  server:
+    build: server
+    restart: unless-stopped
+    volumes:
+      - ./server:/app
+    ports:
+      - 8000:8000
+    env_file:
+      - project.env
+    depends_on:
+      - database
+
+  database:
+    container_name: postgresql_database
+    image: postgres:17.0
+    restart: unless-stopped
+    env_file:
+      - project.env
+
+  database-migrations:
+    image: flyway/flyway:10
+    env_file:
+      - project.env
+    depends_on:
+      - database
+    volumes:
+      - ./database-migrations:/flyway/sql
+    command: -connectRetries=60 -baselineOnMigrate=true migrate
+        
+#  e2e-tests:
+#    entrypoint: "/bin/true"
+#    build: e2e-tests
+#    network_mode: host
+#    depends_on:
+#      - client
+#    volumes:
+#      - ./e2e-tests/tests:/app/tests
