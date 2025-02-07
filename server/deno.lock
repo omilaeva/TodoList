@@ -1,0 +1,22 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@hono/hono@4.6.5": "4.6.5"
+  },
+  "jsr": {
+    "@hono/hono@4.6.5": {
+      "integrity": "68efe4a0ab7c4fb082cb71aa894a25e1c6cfad6d124dc943471e6758a7a1bdee"
+    }
+  },
+  "redirects": {
+    "https://deno.land/x/hono/middleware/cors/index.ts": "https://deno.land/x/hono@v4.3.11/middleware/cors/index.ts"
+  },
+  "remote": {
+    "https://deno.land/x/hono@v4.3.11/middleware/cors/index.ts": "976eb9ce8cefc214b403a2939503a13177cec76223274609a07ca554e0dc623b"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@hono/hono@4.6.5"
+    ]
+  }
+}

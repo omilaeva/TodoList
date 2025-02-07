@@ -1,7 +1,8 @@
-import { Hono } from "jsr:@hono/hono@4.6.5";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
 
 const app = new Hono();
+app.use("*", cors());
 
-app.all("/", (c) => c.text("Hi again!"));
 
 export default app;

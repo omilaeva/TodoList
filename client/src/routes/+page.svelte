@@ -1,5 +1,6 @@
 <script>
-  import Message from "$lib/components/Message.svelte";
+    import Todos from "$lib/components/Todos.svelte";
 </script>
 
-<Message />
+<Todos />
+
