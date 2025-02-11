@@ -1,13 +1,12 @@
 <script>
-    import { useTodosState } from "$lib/states/todoState.svelte.js";
+    import { useTodoState } from "$lib/states/todoState.svelte.js";
 
-    const todosState = useTodosState();
+    const todosState = useTodoState();
 
-    const addTodo = (e) => {
+    const addTodo = async (e) => {
         e.preventDefault();
         const todo = Object.fromEntries(new FormData(e.target));
-        todo.uuid = crypto.randomUUID();
-        todosState.add(todo);
+        await todosState.add(todo);
         e.target.reset();
     }
 </script>

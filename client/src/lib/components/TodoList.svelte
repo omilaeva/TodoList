@@ -1,8 +1,8 @@
 <script>
     import TodoItem from "$lib/components/TodoItem.svelte";
-    import {useTodosState} from "$lib/states/todoState.svelte.js";
+    import {useTodoState} from "$lib/states/todoState.svelte.js";
 
-    const todosState = useTodosState();
+    const todosState = useTodoState();
 </script>
 
 <h2>Existing todos</h2>

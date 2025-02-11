@@ -1,35 +1,30 @@
 import { browser } from "$app/environment";
+import * as todoApi from "$lib/apis/todosApi.js";
 
-let initialTodos = [];
-const TODO_LIST = "todos"
-if (browser && localStorage.hasOwnProperty(TODO_LIST)) {
-    initialTodos = JSON.parse(localStorage.getItem(TODO_LIST));
-}
-let todos = $state(initialTodos);
+let todoState = $state([]);
 
-const saveTodos = () => {
-    localStorage.setItem(TODO_LIST, JSON.stringify(todos));
+if (browser) {
+    todoState = await todoApi.readTodos();
 }
 
-const useTodosState = () => {
+const useTodoState = () => {
     return {
         get todos() {
-            return todos;
+            return todoState;
         },
-        add: (todo) => {
-            todos.push(todo);
-            saveTodos();
+        add: async (todo) => {
+            const newTodo = await todoApi.createTodo(todo);
+            todoState.push(newTodo);
         },
-        changeDone: (uuid) => {
-            const todo = todos.find((todo) => todo.uuid === uuid);
+        changeDone: async (todo) => {
             todo.done = !todo.done;
-            saveTodos();
+            await todoApi.setDone(todo);
         },
-        remove: (uuid) => {
-            todos = todos.filter((todo) => todo.uuid !== uuid);
-            saveTodos();
-        }
+        remove: async (id) => {
+            const removedTodo = await todoApi.deleteTodo(id);
+            todoState = todoState.filter((todo) => todo.id !== removedTodo.id);
+        },
     };
 };
 
-export { useTodosState };
+export { useTodoState };
