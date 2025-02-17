@@ -1,16 +1,18 @@
 services:
-  client:
+  todo_list_client:
     build: client
+    image: todolist-client
     restart: unless-stopped
     volumes:
       - ./client/src:/app/src
     ports:
       - 5173:5173
     depends_on:
-      - server
+      - todo_list_server
 
-  server:
+  todo_list_server:
     build: server
+    image: todolist-server
     restart: unless-stopped
     volumes:
       - ./server:/app
@@ -19,21 +21,21 @@ services:
     env_file:
       - project.env
     depends_on:
-      - database
+      - todo_list_database
 
-  database:
-    container_name: postgresql_database
+  todo_list_database:
+    container_name: postgresql_todo_list_database
     image: postgres:17.0
     restart: unless-stopped
     env_file:
       - project.env
 
-  database-migrations:
+  todo_list_database-migrations:
     image: flyway/flyway:10
     env_file:
       - project.env
     depends_on:
-      - database
+      - todo_list_database
     volumes:
       - ./database-migrations:/flyway/sql
     command: -connectRetries=60 -baselineOnMigrate=true migrate
