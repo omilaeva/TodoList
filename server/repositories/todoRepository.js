@@ -1,6 +1,4 @@
-import postgres from "postgres";
-
-const sql = postgres();
+import { sql } from "./database.js";
 
 export const getTodos = async () => {
     return await sql`SELECT * FROM todos`;

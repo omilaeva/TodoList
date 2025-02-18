@@ -3,11 +3,14 @@
 
     const todosState = useTodoState();
 
+    let isLoading = $state(false);
+
     const addTodo = async (e) => {
         e.preventDefault();
+        isLoading = true;
         const todo = Object.fromEntries(new FormData(e.target));
-        // TODO handle error response from server
         await todosState.add(todo);
+        isLoading = false;
         e.target.reset();
     }
 </script>
@@ -25,8 +28,8 @@
                    id="done" name="done" type="checkbox"/>
             <label class="text-gray-700" for="done">Done</label>
         </div>
-        <input class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-               type="submit" value="Add Todo"/>
+        <input class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition disabled:bg-blue-100"
+               disabled={isLoading} type="submit" value="Add Todo"/>
     </form>
 </div>
 

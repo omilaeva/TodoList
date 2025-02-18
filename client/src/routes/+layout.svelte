@@ -34,6 +34,6 @@
         <a href="/about" class="block py-2">About</a>
     </div>
 </nav>
-<div class="h-screen bg-gradient-to-br from-blue-400 via-emerald-200 to-fuchsia-400">
+<div class="h-auto bg-gradient-to-br from-blue-400 via-emerald-200 to-fuchsia-400">
     {@render children()}
 </div>

@@ -14,7 +14,9 @@ const useTodoState = () => {
         },
         add: async (todo) => {
             const newTodo = await todoApi.createTodo(todo);
-            todoState.push(newTodo);
+            if (newTodo) {
+                todoState.push(newTodo);
+            }
         },
         changeDone: async (todo) => {
             todo.done = !todo.done;
@@ -22,8 +24,19 @@ const useTodoState = () => {
         },
         remove: async (id) => {
             const removedTodo = await todoApi.deleteTodo(id);
-            todoState = todoState.filter((todo) => todo.id !== removedTodo.id);
+            if (removedTodo) {
+                todoState = todoState.filter((todo) => todo.id !== removedTodo.id);
+            }
         },
+        update: async (todo) => {
+            const updatedTodo = await todoApi.updateTodo(todo);
+            if (updatedTodo) {
+                const index = todoState.findIndex(elem => elem.id === todo.id);
+                todoState[index] = updatedTodo;
+                return true;
+            }
+            return false;
+        }
     };
 };
 
