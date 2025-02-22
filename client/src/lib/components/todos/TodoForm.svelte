@@ -18,8 +18,7 @@
 <div class="flex justify-center items-center p-8">
     <form class="bg-white p-6 rounded-lg shadow-md w-full max-w-md space-y-4" onsubmit={addTodo}>
         <div>
-            <label class="block text-gray-700 font-semibold mb-1" for="name">Enter
-                task:</label>
+            <label class="block text-gray-700 font-semibold mb-1" for="name">Enter task:</label>
             <input class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                    type="text" name="name" id="name" placeholder="Enter a new todo"/>
         </div>
