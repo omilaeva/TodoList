@@ -1,6 +1,7 @@
-import {Hono} from "jsr:@hono/hono@4.6.5";
+import {Hono} from "hono";
+import "jsr:@std/dotenv/load";
 import { env } from 'hono/adapter';
-import {cors} from "jsr:@hono/hono@4.6.5/cors";
+import {cors} from "hono/cors";
 import * as todoController from "./controllers/todoController.js";
 import * as userController from "./controllers/userController.js";
 
